@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:selectors="clr-namespace:ListaTareas_AvilaCristina_DID.Selectors"
+             xmlns:viewmodel="clr-namespace:ListaTareas_AvilaCristina_DID.MVVM.ModelView"
+             x:Class="ListaTareas_AvilaCristina_DID.MVVM.View.TaskView"
+             Title="TaskView">
+    <ContentPage.Resources>
+        <selectors:TaskDataTemplateSelector x:Key="TaskSelector" />
+    </ContentPage.Resources>
+
+    <Grid BackgroundColor="GhostWhite" Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+       
+        <!--Encabezado-->
+        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center">
+            <Image Source="calendario.jpg"
+                   HeightRequest="50"
+                   HorizontalOptions="Center"
+                   WidthRequest="50"/>
+            <Label Text="Mi agenda"                  
+                   FontSize="Title"
+                   Margin="10"
+                   FontAttributes="Bold"
+                   FontFamily="monospace"/>
+            <Image Source="calendario.jpg"
+                   HeightRequest="50"
+                   HorizontalOptions="Center"
+                   WidthRequest="50"/>
+        </HorizontalStackLayout>
+
+        <!--Cuerpo (botón y lista tareas)-->
+       
+        <Button Text="Añadir nueva tarea"
+                Command="{Binding NewTaskCommand}"
+                CommandParameter="{Binding .}"
+                Grid.Row="1"
+                WidthRequest="200"
+                CornerRadius="100"
+                FontAttributes="Bold"
+                BackgroundColor="CornflowerBlue"
+                FontFamily="monospace"
+                Margin="30"/> 
+     
+        <CollectionView ItemsSource="{Binding Tasks}" 
+                        ItemTemplate="{StaticResource TaskSelector}"
+                        Grid.Row="3">
+            
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

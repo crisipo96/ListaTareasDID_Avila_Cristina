@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ListaTareas_AvilaCristina_DID.MVVM.View.NewTaskView"
+             xmlns:viewmodel="clr-namespace:ListaTareas_AvilaCristina_DID.MVVM.ModelView">
+
+    <VerticalStackLayout>
+
+        <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="0,20,0,0">
+            <Image Source="calendario.jpg"
+                  HeightRequest="50"
+                  HorizontalOptions="Center"
+                  WidthRequest="50"/>
+            <Label Text="Nueva tarea"                  
+                  FontSize="Title"
+                  Margin="10"
+                  FontAttributes="Bold"
+                  FontFamily="monospace"/>
+            <Image Source="calendario.jpg"
+                  HeightRequest="50"
+                  HorizontalOptions="Center"
+                  WidthRequest="50"/>
+
+        </HorizontalStackLayout>
+
+        <Frame Margin="10,50,10,10">
+            <Frame.Background>
+                <LinearGradientBrush EndPoint="1,0">
+                    <GradientStop Offset="0" Color="PaleVioletRed"/>
+                    <GradientStop Offset="1" Color="Violet"/>
+                </LinearGradientBrush>
+            </Frame.Background>
+            <Entry Text="Añade tu nueva tarea"/>
+        </Frame>
+
+        <Grid ColumnDefinitions="*,*" RowDefinitions="*,*">
+
+            <Label Text="Estado:"
+                 FontAttributes="Bold"
+                 FontSize="Small"
+                 FontFamily="monospace"
+                 Margin="20"/>
+            <RadioButton Content="completada"
+                       Margin="40"/>
+            <RadioButton Grid.Column="1" 
+                       Content="no completada"/>
+
+            <Label Text="Prioridad:"
+                 Grid.Row="1"
+                 FontAttributes="Bold"
+                 FontSize="Small"
+                 FontFamily="monospace"
+                 Margin="20"/>
+            <RadioButton Content="Alta"
+                         GroupName="GnAlta"
+                         HorizontalOptions="Start"
+                         Grid.Row="1"
+                         Margin="40"/>
+            <RadioButton Content="Media"
+                         GroupName="GnMedia"
+                         Grid.ColumnSpan="2"
+                         Grid.Row="1"
+                       HorizontalOptions="Center"/>
+            <RadioButton Content="Baja"
+                         GroupName="GnBaja"
+                         Grid.ColumnSpan="2"
+                         Grid.Row="1"
+                         HorizontalOptions="End"
+                         Margin="0,0,30,0"/>
+
+        </Grid>
+
+        <Button Text="Guardar" 
+              Grid.Row="3"
+              Grid.ColumnSpan="2"
+              HorizontalOptions="Center"
+              BackgroundColor="DarkViolet"/>
+
+        <Button Text="Atras" 
+                Command="{Binding GoBackCommand, Source={RelativeSource AncestorType={x:Type viewmodel:NewTaskViewModel}}}"
+                CommandParameter="{Binding .}"
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Margin="50"
+                HorizontalOptions="Center"
+                BackgroundColor="DimGray"/>
+
+
+    </VerticalStackLayout>
+</ContentView>

@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:ListaTareas_AvilaCristina_DID.MVVM.ModelView">
+
+    <DataTemplate x:Key="LowPriorityTask">
+        <!--Aquí definimos cómo queremos que se vea cada uno de los productos-->
+        <Grid Margin="10,10,15,1" ColumnDefinitions="*,7*,*" RowDefinitions="*">
+              
+            <CheckBox Color="Black"/>
+
+            <Frame Grid.Column="1" Grid.ColumnSpan="1" BorderColor="Green">
+                <Frame.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Offset="0" Color="LightGreen"/>
+                        <GradientStop Offset="1" Color="Green"/>
+
+                    </LinearGradientBrush>
+                </Frame.Background>
+            </Frame>
+            <Label  Grid.Column="1" Text="{Binding Name}"
+                    FontFamily="monospace"
+                    FontSize="Small"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Padding="10"
+                    Margin="3"/>
+            <!--CommandParameter le pasa al metodo la tarea que tiene que eliminar, al poner punto hace referencia a la tarea actual-->
+            <ImageButton  Grid.Column="2"
+                          Source="papelera.png"
+                          Command="{Binding DeletedCommand, Source={RelativeSource AncestorType={x:Type viewmodel:TaskViewModel}}}"
+                          CommandParameter="{Binding .}"
+                          HorizontalOptions="End"
+                          WidthRequest="30" HeightRequest="30"/>
+
+            <ImageButton  Grid.Column="1"
+                          Source="editar.png"
+                          Command="{Binding ShowDetailsCommand, Source={RelativeSource AncestorType={x:Type viewmodel:TaskViewModel}}}"
+                          CommandParameter="{Binding .}"
+                          HorizontalOptions="End"
+                          Margin="0,0,20,0"
+                          WidthRequest="40" HeightRequest="40"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MediumPriorityTask">
+        <!--Aquí definimos cómo queremos que se vea cada uno de los productos-->
+        <Grid Margin="10,10,15,1" ColumnDefinitions="*,7*,*" RowDefinitions="*">
+
+            <CheckBox Color="Black"/>
+
+            <Frame Grid.Column="1" Grid.ColumnSpan="1" BorderColor="OrangeRed">
+                <Frame.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Offset="0" Color="Orange"/>
+                        <GradientStop Offset="1" Color="DarkOrange"/>
+
+                    </LinearGradientBrush>
+                </Frame.Background>
+            </Frame>
+            <Label  Grid.Column="1" Text="{Binding Name}"
+                    FontFamily="monospace"
+                    FontSize="Small"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Padding="10"
+                    Margin="3"/>
+            <ImageButton  Grid.Column="2"
+                          Source="papelera.png"
+                          Command="{Binding DeletedCommand, Source={RelativeSource AncestorType={x:Type viewmodel:TaskViewModel}}}"
+                          CommandParameter="{Binding .}"
+                          HorizontalOptions="End"
+                          WidthRequest="30" HeightRequest="30"/>
+
+            <ImageButton  Grid.Column="1"
+                          Source="editar.png"
+                          HorizontalOptions="End"
+                         Margin="0,0,20,0"
+                          WidthRequest="40" HeightRequest="40"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="HighPriorityTask">
+        <!--Aquí definimos cómo queremos que se vea cada uno de los productos-->
+        <Grid Margin="10,10,15,1" ColumnDefinitions="*,7*,*" RowDefinitions="*">
+
+            <CheckBox Color="Black"/>
+
+            <Frame Grid.Column="1" Grid.ColumnSpan="1" BorderColor="DarkRed">
+                <Frame.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Offset="0" Color="red"/>
+                        <GradientStop Offset="1" Color="OrangeRed"/>
+
+                    </LinearGradientBrush>
+                </Frame.Background>
+            </Frame>
+            <Label  Grid.Column="1" Text="{Binding Name}"
+                    FontFamily="monospace"
+                    FontSize="Small"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Padding="10"
+                    Margin="3"/>
+          
+            <ImageButton  Grid.Column="2"
+                          Source="papelera.png"
+                          Command="{Binding DeletedCommand, Source={RelativeSource AncestorType={x:Type viewmodel:TaskViewModel}}}"
+                          CommandParameter="{Binding .}"
+                          HorizontalOptions="End"
+                          WidthRequest="30" HeightRequest="30"/>
+
+            <ImageButton  Grid.Column="1"
+                          Source="editar.png"
+                          HorizontalOptions="End"
+                          Margin="0,0,20,0"
+                          WidthRequest="40" HeightRequest="40"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CompletedLowPriorityTask">
+        <!--Aquí definimos cómo queremos que se vea cada uno de los productos-->
+        <Grid Margin="10,10,15,1" ColumnDefinitions="*,7*,*" RowDefinitions="*">
+
+            <CheckBox Color="Black"  IsChecked="True"/>
+
+            <Frame Grid.Column="1" Grid.ColumnSpan="1" BorderColor="Green">
+                <Frame.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Offset="0" Color="LightGreen"/>
+                        <GradientStop Offset="1" Color="Green"/>
+
+                    </LinearGradientBrush>
+                </Frame.Background>
+            </Frame>
+            <Label  Grid.Column="1"                
+                    HorizontalOptions="Start"
+                    Padding="10"
+                    Margin="3">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Name}"
+                              TextDecorations="Strikethrough"
+                              FontAttributes="Bold"
+                              FontFamily="monospace"
+                               FontSize="Small"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <ImageButton  Grid.Column="2"
+                          Source="papelera.png"
+                          Command="{Binding DeletedCommand, Source={RelativeSource AncestorType={x:Type viewmodel:TaskViewModel}}}"
+                          CommandParameter="{Binding .}"
+                          HorizontalOptions="End"
+                          WidthRequest="30" HeightRequest="30"/>
+
+            <ImageButton  Grid.Column="1"
+                          Source="editar.png"
+                          HorizontalOptions="End"
+                          Margin="0,0,20,0"
+                          WidthRequest="40" HeightRequest="40"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CompletedMediumPriorityTask">
+        <!--Aquí definimos cómo queremos que se vea cada uno de los productos-->
+        <Grid Margin="10,10,15,1" ColumnDefinitions="*,7*,*" RowDefinitions="*">
+
+            <CheckBox Color="Black" IsChecked="True"/>
+
+            <Frame Grid.Column="1" Grid.ColumnSpan="1" BorderColor="OrangeRed">
+                <Frame.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Offset="0" Color="Orange"/>
+                        <GradientStop Offset="1" Color="DarkOrange"/>
+
+                    </LinearGradientBrush>
+                </Frame.Background>
+            </Frame>
+            <Label  Grid.Column="1"                
+                 HorizontalOptions="Start"
+                 Padding="10"
+                 Margin="3">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Name}"
+                           TextDecorations="Strikethrough"
+                           FontAttributes="Bold"
+                           FontFamily="monospace"
+                           FontSize="Small"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <ImageButton Grid.Column="2"
+                         Source="papelera.png"
+                         Command="{Binding DeletedCommand, Source={RelativeSource AncestorType={x:Type viewmodel:TaskViewModel}}}"
+                         CommandParameter="{Binding .}"
+                         HorizontalOptions="End"
+                         WidthRequest="30" HeightRequest="30"/>
+
+            <ImageButton  Grid.Column="1"
+                          Source="editar.png"
+                          HorizontalOptions="End"
+                          Margin="0,0,20,0"
+                          WidthRequest="40" HeightRequest="40"/>
+        </Grid>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="CompletedHighPriorityTask">
+        <!--Aquí definimos cómo queremos que se vea cada uno de los productos-->
+        <Grid Margin="10,10,15,1" ColumnDefinitions="*,7*,*" RowDefinitions="*">
+
+            <CheckBox Color="Black"  IsChecked="True"/>
+
+            <Frame Grid.Column="1" Grid.ColumnSpan="1" BorderColor="DarkRed">
+                <Frame.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Offset="0" Color="Red"/>
+                        <GradientStop Offset="1" Color="OrangeRed"/>
+
+                    </LinearGradientBrush>
+                </Frame.Background>
+            </Frame>
+            <Label  Grid.Column="1"                
+                    HorizontalOptions="Start"
+                    Padding="10"
+                    Margin="3">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Name}"
+                            TextDecorations="Strikethrough"
+                            FontAttributes="Bold"
+                            FontFamily="monospace"
+                             FontSize="Small" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <ImageButton Grid.Column="2"
+                        Source="papelera.png"
+                        Command="{Binding DeletedCommand, Source={RelativeSource AncestorType={x:Type viewmodel:TaskViewModel}}}"
+                        CommandParameter="{Binding .}"
+                        HorizontalOptions="End"
+                        WidthRequest="30" HeightRequest="30"/>
+
+            <ImageButton Grid.Column="1"
+                        Source="editar.png"
+                        HorizontalOptions="End"
+                        Margin="0,0,20,0"
+                        WidthRequest="40" HeightRequest="40"/>
+        </Grid>
+    </DataTemplate>
+
+
+
+
+</ResourceDictionary>
